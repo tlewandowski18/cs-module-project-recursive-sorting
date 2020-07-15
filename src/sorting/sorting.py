@@ -49,7 +49,8 @@ def merge(arrA, arrB):
 def merge_sort(arr):
     # Your code here
     #check to see if hit the base case where length of array equals 1. We know array with one item is sorted
-    if len(arr) == 1:
+    
+    if len(arr) <= 1:
         return arr
     if len(arr) > 1:
         #if length of arr is 1, split the array into two halves
@@ -58,51 +59,13 @@ def merge_sort(arr):
         right_arr = arr[mid_point:]
 
         #run merge_sort on both halves to sort each half
-        merge_sort(left_arr)
-        merge_sort(right_arr)
+        left = merge_sort(left_arr)
+        right = merge_sort(right_arr)
 
-        # return merge(left_arr, right_arr)
-        
-    
-        #set iterators for both arrays
-        i = 0
-        j = 0
+        arr = merge(left, right)
+        return arr
 
-        # set iterator for main list
-
-        k = 0
-        #compare values in both list until you reach the end of one list
-        while i < len(left_arr) and j < len(right_arr):
-            #compare one value from list A with one value from list B
-            if left_arr[i] < right_arr[j]:
-                #if value from first list is lower add that to the proper spot of main list and increment iterator
-                arr[k] = left_arr[i]
-                i += 1
-            else:
-                #if value from second list is lower add that to the proper spot of main list and increment iterator
-                arr[k] = right_arr[j]
-                j += 1
-            #move to the next slot in main list
-            k += 1
-
-            #check first list to see if any values remain. if so, add to main list 
-        while i < len(left_arr):
-            #add item to main list
-            arr[k] = left_arr[i]
-            #increment iterator for first list and main list
-            i += 1
-            k += 1
-
-        #check second list to see if any values remain. if so, add to main list 
-        while j < len(right_arr):
-            #add item to main list
-            arr[k] = right_arr[j]
-            #increment iterator for second list and main list
-            j += 1
-            k += 1
-
-    return arr
-    
+   
 
 # STRETCH: implement the recursive logic for merge sort in a way that doesn't 
 # utilize any extra memory
